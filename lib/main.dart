@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-//
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -27,7 +27,7 @@ class _HomePageState extends State<HomePage> {
 
   // fetching api
   //declare the api site
-  var url = Uri.parse("https://jsonplaceholder.typicode.com/users");
+  var url = Uri.parse("https://jsonplaceholder.typicode.com/posts");
   //converting the postmodel to list
 
 
