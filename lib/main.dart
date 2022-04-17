@@ -19,67 +19,30 @@ class MyApp extends StatelessWidget {
 
 class HomePage extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomPageState createState() => _HomPageState();
 }
 
-class _HomePageState extends State<HomePage> {
-
-
-  // fetching api
-  //declare the api site
-  var url = Uri.parse("https://jsonplaceholder.typicode.com/posts");
-  //converting the postmodel to list
-
-
-
-  Future<PostModel> getApi()async{
-    //declaring the response
-    final response = await http.get(url);
-
-    //declare the data
-    
-
-    //check if the response is ok
-    if(response.statusCode == 200){
-
-
-    }else{
-      throw Exception('Failed to load album');
-    }
-  }
-
-
-
-
-
+class _HomPageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Container(
+      body: FutureBuilder(
+        future: ApiProvider().getData(),
+        builder: (context, snapshot){
+          if(!snapshot.hasData){
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          else {
+            print(snapshot.data);
+            return Text(snapshot.data.toString());
+          }
+        }
 
-        )
-        // child: FutureBuilder(
-        //   future: getApi(),
-        //   builder: (context, snapshot){
-        //     if(!snapshot.hasData){
-        //       return const Center(
-        //         child: CircularProgressIndicator());
-        //     }
-        //     return ListView.builder(
-        //         itemCount:
-        //         itemBuilder: (_, __)=>
-        //             Container(
-        //               height: 50,
-        //               width: MediaQuery.of(context).size.width,
-        //               child: Text(postList[__].name.toString(), style: TextStyle(fontSize: 20, color: Colors.black),),
-        //
-        //             )
-        //     );
-        //   },
-        // )
       ),
     );
   }
 }
+
 
